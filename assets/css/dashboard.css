@@ -1,0 +1,27 @@
+/* dashboard.css */
+.dashboard-header {
+    background: #0069d9;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    background: #f1f7ff;
+    cursor: pointer;
+}
+
+.dashboard-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
