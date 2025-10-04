@@ -14,7 +14,7 @@ session_start();
       <ul class="navbar-nav me-auto">
 
         <!-- Always visible -->
-        <li class="nav-item"> 
+        <li class="nav-item">           
           <a class="nav-link" href="/index.php">Home</a>
         </li>
 
