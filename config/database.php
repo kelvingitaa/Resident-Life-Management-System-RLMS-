@@ -1,10 +1,10 @@
 <?php
 // config/database.php
 
-$host = "127.0.0.1";   // try "localhost" if this fails
+$host = "127.0.0.1";   
 $dbname = "your_db_name"; 
 $username = "root";     // XAMPP default
-$password = "";         // XAMPP default (empty)
+$password = "";         // XAMPP default 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
