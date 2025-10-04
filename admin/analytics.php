@@ -10,19 +10,36 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     exit();
 }
 
-// Total applicants
 $totalApplicants = $pdo->query("SELECT COUNT(*) FROM applicants")->fetchColumn();
-
-// Total offers
 $totalOffers = $pdo->query("SELECT COUNT(*) FROM offers")->fetchColumn();
-
-// Total payments
 $totalPayments = $pdo->query("SELECT SUM(amount) FROM payments")->fetchColumn();
 ?>
-<h1>Analytics Dashboard</h1>
-<ul>
-  <li>Total Applicants: <?= $totalApplicants; ?></li>
-  <li>Total Offers: <?= $totalOffers; ?></li>
-  <li>Total Payments: $<?= number_format($totalPayments, 2); ?></li>
-</ul>
+
+<div class="container mt-5">
+    <div class="dashboard-header">
+        <h2>📊 Analytics Dashboard</h2>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="dashboard-card">
+                <h3>Total Applicants</h3>
+                <p><?= $totalApplicants; ?></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card">
+                <h3>Total Offers</h3>
+                <p><?= $totalOffers; ?></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card">
+                <h3>Total Payments</h3>
+                <p>$<?= number_format($totalPayments, 2); ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include '../includes/footer.php'; ?>
