@@ -1,40 +1,140 @@
 /* style.css - Global styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    color: #222;
 }
 
 h1, h2, h3, h4, h5 {
-    font-weight: 600;
-    color: #333;
+    font-weight: 700;
+    color: #2575fc;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
 }
 
 a {
     text-decoration: none;
+    color: #2575fc;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #6a11cb;
+    text-decoration: underline;
 }
 
-.container {
-    padding: 20px;
+.container, .container-fluid {
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Navbar */
 .navbar {
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(42,82,152,0.15);
+    padding: 16px 32px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+.navbar a {
+    color: #fff;
+    margin-right: 18px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.navbar a:hover {
+    color: #e0eafc;
 }
 
 /* Cards */
 .card {
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(42,82,152,0.12);
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
 }
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(42,82,152,0.18);
 }
 
 /* Buttons */
 .btn {
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(42,82,152,0.10);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn-primary {
+    background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+    border: none;
+    color: #fff;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+}
+.btn-success {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    border: none;
+    color: #fff;
+}
+.btn-success:hover {
+    background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+    color: #fff;
+}
+.btn-danger {
+    background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+    border: none;
+    color: #fff;
+}
+.btn-danger:hover {
+    background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+    color: #fff;
+}
+.btn-outline-light {
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+}
+.btn-outline-light:hover {
+    background: #fff;
+    color: #2575fc;
+}
+
+/* Inputs */
+input, select, textarea {
     border-radius: 6px;
-    padding: 10px 18px;
+    border: 1px solid #bfc9d9;
+    padding: 10px 14px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #2575fc;
+    outline: none;
+}
+
+/* Utility */
+.shadow {
+    box-shadow: 0 2px 8px rgba(42,82,152,0.10);
+}
+.rounded {
+    border-radius: 1.5rem;
+}
+
+/* SaaS Hero Image */
+.saas-hero {
+    max-height: 320px;
+    filter: drop-shadow(0 8px 32px rgba(42,82,152,0.12));
 }

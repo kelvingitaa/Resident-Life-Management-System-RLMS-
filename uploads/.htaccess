@@ -1,0 +1,22 @@
+# Uploads Directory Protection
+
+# Disable directory listing
+Options -Indexes
+
+# Prevent execution of PHP scripts
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|html|htm|shtml|sh|cgi)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Only allow specific file types
+<FilesMatch "\.(jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Prevent hotlinking (optional)
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif|pdf)$ - [NC,F,L]
