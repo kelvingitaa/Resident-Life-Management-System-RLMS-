@@ -1,39 +1,58 @@
 <?php
-include("../config/database.php");
-include("../includes/functions.php");
-session_start();
+/**
+ * Database Configuration
+ */
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = sanitizeInput($_POST['name']);
-    $email = sanitizeInput($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $role = "applicant"; // Default role
+// MariaDB Configuration
+define('DB_HOST', '127.0.0.1');
+define('DB_PORT', '3306');
+define('DB_USER', 'root');
+define('DB_PASS', '5665'); // Set your MariaDB password
+define('DB_NAME', 'hdms');
+define('DB_CHARSET', 'utf8mb4');
 
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $password, $role);
-
-    if ($stmt->execute()) {
-        $_SESSION['user_id'] = $stmt->insert_id;
-        $_SESSION['role'] = $role;
-        redirect("/applicant/dashboard.php");
-    } else {
-        $error = "Registration failed. Email may already exist.";
+class Database {
+    private static $instance = null;
+    private $conn;
+    
+    private function __construct() {
+        try {
+            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_PERSISTENT => false
+            ];
+            
+            $this->conn = new PDO($dsn, DB_USER, DB_PASS, $options);
+        } catch(PDOException $e) {
+            error_log("Database Connection Error: " . $e->getMessage());
+            die("Database connection failed. Please contact administrator.");
+        }
+    }
+    
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+    
+    public function getConnection() {
+        return $this->conn;
+    }
+    
+    // Prevent cloning
+    private function __clone() {}
+    
+    // Prevent unserialization
+    public function __wakeup() {
+        throw new Exception("Cannot unserialize singleton");
     }
 }
-?>
-<?php include("../includes/header.php"); ?>
-<?php include("../includes/navbar.php"); ?>
-<div class="auth-container">
-    <h2>Register</h2>
-    <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="POST">
-        <label>Full Name</label>
-        <input type="text" name="name" required>
-        <label>Email</label>
-        <input type="email" name="email" required>
-        <label>Password</label>
-        <input type="password" name="password" required>
-        <button type="submit">Register</button>
-    </form>
-</div>
-<?php include("../includes/footer.php"); ?>
+
+// Helper function to get database connection
+function getDB() {
+    return Database::getInstance()->getConnection();
+}
