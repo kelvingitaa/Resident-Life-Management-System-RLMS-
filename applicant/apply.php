@@ -29,8 +29,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'applicant') {
             <button type="submit" name="apply" class="btn btn-primary">Submit Application</button>
         </form>
     </div>
-</div>
-
+</div> 
 <?php
 if (isset($_POST['apply'])) {
     $stmt = $pdo->prepare("INSERT INTO applicants (full_name, email, student_id, apartment_choice) VALUES (?, ?, ?, ?)");
