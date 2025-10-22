@@ -3,13 +3,10 @@
  * Database Configuration
  */
 
-// MariaDB Configuration
-define('DB_HOST', '127.0.0.1');
-define('DB_PORT', '3306');
-define('DB_USER', 'root');
-define('DB_PASS', '5665'); 
-define('DB_NAME', 'hdms');
-define('DB_CHARSET', '');
+// Include constants if not already included
+if (!defined('DB_HOST')) {
+    require_once __DIR__ . '/constants.php';
+}
 
 class Database {
     private static $instance = null;
@@ -56,3 +53,11 @@ class Database {
 function getDB() {
     return Database::getInstance()->getConnection();
 }
+?>
+
+define('DB_HOST', '127.0.0.1');
+define('DB_PORT', '3306');
+define('DB_USER', 'root');
+define('DB_PASS', '5665'); 
+define('DB_NAME', 'hdms');
+define('DB_CHARSET', 'utf8mb4');
